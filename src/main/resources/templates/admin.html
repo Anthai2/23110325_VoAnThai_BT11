@@ -1,9 +1,26 @@
-<!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head><meta charset="UTF-8"><title>Admin</title></head>
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Home</title>
+</head>
 <body>
-<h3>Admin page</h3>
-<p>Chỉ ADMIN mới thấy trang này.</p>
-<p><a th:href="@{/}">Home</a></p>
+
+<h1>Home</h1>
+<p>Hi!</p>
+<p>
+    Xin chào: <b><span sec:authentication="name"></span></b>
+    ([<span sec:authentication="principal.authorities"></span>])
+    | <a th:href="@{/logout}">Logout</a>
+</p>
+<p>
+    <a th:href="@{/admin}">Home</a>
+    <a th:href="@{/admin/products}">Quản lý sản phẩm</a> |
+    <a th:href="@{/customer/all}">/customer/all</a>
+</p>
+
+
 </body>
 </html>

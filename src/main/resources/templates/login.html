@@ -1,19 +1,24 @@
-<!doctype html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"><title>Login</title>
+    <title>Please sign in</title>
+    <meta charset="UTF-8"/>
 </head>
 <body>
-<h3>Please sign in</h3>
-<p th:if="${param.error}" style="color:#c00">Invalid credentials</p>
-<p th:if="${param.logout}" style="color:#06c">Logged out</p>
+<h1>Please sign in</h1>
+
+<!-- Thông báo -->
+<div th:if="${param.error}" style="color:red;">Sai tài khoản/mật khẩu.</div>
+<div th:if="${param.logout}" style="color:green;">Đã đăng xuất.</div>
 
 <form th:action="@{/login}" method="post">
-    <label>Username</label><input name="username" required>
-    <label>Password</label><input type="password" name="password" required>
+    <label>Username
+        <input type="text" name="username" autofocus/>
+    </label>
+    <label>Password
+        <input type="password" name="password"/>
+    </label>
     <button type="submit">Sign in</button>
 </form>
-
-<p><a th:href="@{/}">Back to home</a></p>
 </body>
 </html>
