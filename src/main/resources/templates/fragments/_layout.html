@@ -1,0 +1,37 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${title} ?: 'Demo3 - Security & Thymeleaf'">Demo</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<header>
+    <h2>Demo3 - Spring Security 6 + Thymeleaf</h2>
+    <nav>
+        <a th:href="@{/}">Home</a>
+        <a th:href="@{/admin}" sec:authorize="hasRole('ADMIN')">Admin</a>
+        <a th:href="@{/user}"  sec:authorize="hasRole('USER')">User</a>
+        <a th:href="@{/customer/all}" sec:authorize="hasRole('ADMIN')">/customer/all</a>
+        <a th:href="@{/customer/001}" sec:authorize="hasRole('USER')">/customer/001</a>
+
+        <span sec:authorize="isAuthenticated()">
+      | Xin chào: <b sec:authentication="name"></b>
+      (<span sec:authentication="authorities"></span>)
+      | <a th:href="@{/logout}">Logout</a>
+    </span>
+        <span sec:authorize="isAnonymous()">
+      | <a th:href="@{/login}">Login</a>
+    </span>
+    </nav>
+    <hr/>
+</header>
+
+<main>
+    <div th:insert="${content}">[content]</div>
+</main>
+
+<footer><hr/>© Demo3</footer>
+</body>
+</html>

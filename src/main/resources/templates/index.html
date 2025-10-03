@@ -1,0 +1,37 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<h2>Home</h2>
+
+<p>Hi!</p>
+
+<p>
+  <span sec:authorize="isAuthenticated()">
+    Xin chào: <b sec:authentication="name"></b>
+    ([<span sec:authentication="authorities"></span>])
+    | <a th:href="@{/logout}">Logout</a>
+  </span>
+
+    <span sec:authorize="isAnonymous()">
+    <a th:href="@{/login}">Login</a>
+  </span>
+</p>
+
+<nav>
+    <!-- chỉ hiện với ADMIN -->
+    <a th:href="@{/admin}" sec:authorize="hasRole('ADMIN')">Admin page</a>
+
+    <!-- chỉ hiện với USER -->
+    <a th:href="@{/user}"  sec:authorize="hasRole('USER')">User page</a>
+
+    <!-- ví dụ thêm: link API theo quyền -->
+    <span sec:authorize="hasRole('ADMIN')"> | <a th:href="@{/customer/all}">/customer/all</a></span>
+    <span sec:authorize="hasRole('USER')">  | <a th:href="@{/customer/001}">/customer/001</a></span>
+</nav>
+</body>
+</html>
